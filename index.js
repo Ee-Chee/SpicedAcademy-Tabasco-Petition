@@ -2,16 +2,15 @@
 const express = require("express");
 const app = express();
 //handlebars
-var hb = require("express-handlebars");
+const hb = require("express-handlebars");
 app.engine("handlebars", hb());
 app.set("view engine", "handlebars");
-var dB = require("./utilities/db");
-var bct = require("./utilities/bcrypt");
+//other utilities
+const dB = require("./utilities/db");
+const bct = require("./utilities/bcrypt");
 const csurf = require("csurf");
 const cookieSession = require("cookie-session");
 //use cookie-session to prevent from user tampering cookies on browser
-//////////////////////////////////////////////////////////////
-app.use(express.static("./public"));
 app.use(
     cookieSession({
         secret: `I'm wondering...`,
@@ -25,9 +24,7 @@ app.use(
         extended: false
     })
 );
-
 app.use(csurf()); //prevent crsf attack. Prevent using postman to post rather than our website itself
-
 app.use(function(req, res, next) {
     //using token/key-like to open up the functionality of post
     //locals store the properties and values so that it renders to every template made when executing res.render()
@@ -35,6 +32,8 @@ app.use(function(req, res, next) {
     res.setHeader("X-Frame-Options", "deny"); //prevent clickhijacking
     next();
 });
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+app.use(express.static("./public"));
 
 app.get("/register", (req, res) => {
     if (req.session.registered) {
@@ -231,10 +230,14 @@ app.post("/profile", (req, res) => {
     if (!req.body.age && !req.body.city && !req.body.homepage) {
         //null, undefined, NaN, "" and 0 by default are falsy.
         return res.redirect("/petition"); //to handle empty string. age must be an integer not ""
-    } else if (!req.body.age || req.body.age < 1) {
+    }
+    if (!req.body.age || req.body.age < 1) {
         req.body.age = null; //to handle empty string and negative int for age but data exists in city and homepage
-    } else if (
+    }
+    if (
         //prevent users from inserting executable js command on url, e.g. javascript:alert("hi");
+        req.body.homepage != "" &&
+        //to handle only homepage is set empty string. Otherwise, href for empty info would be http://
         !req.body.homepage.startsWith("http://") &&
         !req.body.homepage.startsWith("https://") &&
         !req.body.homepage.startsWith("//")
@@ -270,6 +273,14 @@ app.get("/profile/edit", (req, res) => {
 app.post("/profile/edit", (req, res) => {
     if (!req.body.age || req.body.age < 1) {
         req.body.age = null;
+    }
+    if (
+        req.body.homepage != "" &&
+        !req.body.homepage.startsWith("http://") &&
+        !req.body.homepage.startsWith("https://") &&
+        !req.body.homepage.startsWith("//")
+    ) {
+        req.body.homepage = "http://" + req.body.homepage;
     }
     if (!req.body.pw) {
         Promise.all([
