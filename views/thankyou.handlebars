@@ -1,18 +1,23 @@
 <div class="container">
+    <h4><a href="/log">Log out</a></h4>
     <div id="themeimg">
         <img src="no-plastic-bags.png" align="middle" />
     </div>
-
-
         <h1>
             Thank you for your signature!
         </h1>
 
+        <div id="themeimg">
+            <img src="{{signature}}" alt="my signature">
+        </div>
 
+        <div id="container1">
+            <form method="post" action="/sign-removed">
+                <button id="button1" type="submit" name="deleted" value="granted">Delete?</button>
+                {{>csrf}}
+            </form>
+            <a href="/signers">See other signers</a>
+            <a href="/profile/edit">You may edit your profile here</a>
 
+        </div>
 </div>
-<script>
-var image = new Image(400, 150);
-image.src = "{{signature}}";
-document.body.appendChild(image);
-</script>

@@ -1,0 +1,24 @@
+<div class="container">
+    <h4><a href="/log">Log out</a></h4>
+    <div id="themeimg">
+        <img src="/no-plastic-bags.png" align="middle" />
+    <!-- slash is needed here to redirect to localhost:8081/no-plastic-bags.png(public). Otherwise, it refers to localhost:8081/signers/no-plastic-bags.png     -->
+    </div>
+        <h1>
+            We the undersigned demand that plastics be banned by all nations.
+        </h1>
+        <div id="container1">
+            {{#signedCityUsers}}
+            <div>
+                {{#if homepage}}
+                	<a href="{{homepage}}" target="_blank" >{{firstn}} {{lastn}}</a>
+                        {{#if age}} {{age}}{{/if}}
+                {{else}}
+                    {{firstn}} {{lastn}}
+                    {{#if age}} {{age}}{{/if}}
+                {{/if}}
+            </div>
+            {{/signedCityUsers}}
+        </div>
+
+</div>

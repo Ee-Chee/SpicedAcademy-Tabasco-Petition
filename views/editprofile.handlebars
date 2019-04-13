@@ -1,0 +1,22 @@
+<div class="container">
+        <div id="themeimg">
+            <img src="/no-plastic-bags.png" align="middle" />
+        </div>
+        <h1>
+            Edit your profile
+        </h1>
+        <form id="container1" method="post">
+            <p id="error">
+                {{errormsg}}
+            </p>
+            <input type="text" placeholder="First Name" autocomplete="off" name="firstName"/>
+            <input type="text" placeholder="Last Name" autocomplete="off" name="lastName"/>
+            <input type="text" placeholder="Email Address" autocomplete="off" name="email"/>
+            <input type="password" placeholder="Password" autocomplete="off" name="pw"/>
+            <input type="text" placeholder="Age" autocomplete="off" name="age"/>
+            <input type="text" placeholder="City" autocomplete="off" name="city"/>
+            <input type="text" placeholder="Homepage" autocomplete="off" name="homepage"/>
+            <button id="button1" type="submit">UPDATE</button>
+            {{>csrf}}
+        </form>
+</div>

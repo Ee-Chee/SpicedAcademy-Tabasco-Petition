@@ -1,0 +1,26 @@
+<div class="container">
+
+        <div id="themeimg">
+            <img src="no-plastic-bags.png" align="middle" />
+        </div>
+        <h1>
+            Please log in.
+        </h1>
+        <form id="container1" method="post">
+            <p id="error">
+                {{errormsg}}
+            </p>
+            <input type="text" placeholder="Email Address" autocomplete="off" name="email"/>
+            <input type="password" placeholder="Password" autocomplete="off" name="pw"/>
+            <button id="button1" type="submit">LOG IN</button>
+            {{>csrf}}
+        </form>
+        
+        <div id="container2">
+            <a href="/register">
+                Just came here? Welcome :D! You can register a free account here. Join us!
+            </a>
+        </div>
+
+
+</div>

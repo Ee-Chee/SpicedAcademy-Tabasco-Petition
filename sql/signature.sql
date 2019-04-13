@@ -1,8 +1,6 @@
-DROP TABLE IF EXISTS signatures; 
+DROP TABLE IF EXISTS signatures;
 CREATE TABLE signatures(
     id SERIAL PRIMARY KEY,
-    firstN VARCHAR(100) NOT NULL CHECK (firstN!=''),
-    lastN VARCHAR(100) NOT NULL CHECK (lastN!=''),
-    signature TEXT NOT NULL CHECK (signature!='')
-    -- single quote
+    signature TEXT NOT NULL CHECK (signature!=''),
+    signed_id INTEGER REFERENCES registered(id) NOT NULL UNIQUE
 );
