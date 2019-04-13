@@ -122,7 +122,7 @@ app.get("/signers", (req, res) => {
             .then(data => {
                 // console.log("hi: ", data);
                 let signedUserArr = [];
-                for (let i = 0; i < req.session.currID; i++) {
+                for (let i = 0; i < data.rows.length; i++) {
                     signedUserArr.push(data.rows[i]);
                 }
                 res.render("signerpage", {
@@ -292,7 +292,8 @@ app.post("/profile/edit", (req, res) => {
             .catch(err => {
                 console.log("Error caught: ", err);
                 res.render("editprofile", {
-                    errormsg: "Invalid inputs detected, please insert again!",
+                    errormsg:
+                        "Invalid inputs detected! Firstname, lastname and email address are mandatory fields, please insert again!",
                     layout: "main"
                 });
             });
@@ -320,7 +321,8 @@ app.post("/profile/edit", (req, res) => {
             .catch(err => {
                 console.log("Error caught: ", err);
                 res.render("editprofile", {
-                    errormsg: "Invalid inputs detected, please insert again!",
+                    errormsg:
+                        "Invalid inputs detected! Firstname, lastname and email address are mandatory fields, please insert again!",
                     layout: "main"
                 });
             });
