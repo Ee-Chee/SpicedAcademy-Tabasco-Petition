@@ -35,11 +35,18 @@ exports.getLogged = function(email) {
 };
 
 exports.addProfile = function(age, city, homepage, userID) {
-    let q = `INSERT INTO user_profiles (age, city, homepage, user_id) VALUES ($1, $2, $3, $4) RETURNING *;`;
+    let q = `INSERT INTO user_profiles (age, city, homepage, user_id)
+            VALUES ($1, $2, $3, $4)
+            ON CONFLICT (user_id)
+            DO UPDATE SET age = $1, city = $2, homepage = $3 RETURNING *;`;
+    //to prevent error when user intends to change their profile and rewinds back to profile before giving out signature
     let params = [age, city, homepage, userID];
     return db.query(q, params);
 };
-
+let q = `INSERT INTO user_profiles (age, city, homepage, user_id)
+        VALUES ($1, $2, $3, $4)
+        ON CONFLICT (user_id)
+        DO UPDATE SET age = $1, city = $2, homepage = $3;`;
 exports.getSigners = function() {
     //inner join first then left join. Left join includes all on the left, null data for the right if there is any.
     let q = `SELECT firstN, lastN, age, city, homepage
@@ -86,4 +93,9 @@ exports.removeSignature = function(currID) {
     let q = `Delete FROM signatures WHERE signed_id = $1;`;
     let params = [currID];
     return db.query(q, params);
+};
+
+exports.countSignature = function() {
+    let q = `SELECT COUNT (id) FROM signatures;`;
+    return db.query(q);
 };
