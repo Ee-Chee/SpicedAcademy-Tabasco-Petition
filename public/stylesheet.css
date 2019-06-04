@@ -16,6 +16,7 @@ h1 {
 h4 {
     text-align: right;
 }
+
 #themeimg {
     display: flex;
     justify-content: center;
@@ -37,4 +38,18 @@ h4 {
 
 a {
     text-decoration: none;
+}
+
+@media only screen and (max-width: 1000px) {
+    /* For tablets: */
+    #head {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    /* For mobile phones: */
+    #head {
+        font-size: 18px;
+    }
 }

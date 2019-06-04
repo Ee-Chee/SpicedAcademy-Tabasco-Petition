@@ -44,6 +44,7 @@ app.get("*", (req, res) => {
     res.redirect("/register");
 });
 
-app.listen(process.env.PORT || 8081, () =>
-    console.log("I'm Bot serving for petition project!")
-);
+module.exports = app;
+if (require.main == module) {
+    app.listen(process.env.PORT || 8081, () => console.log("Bot me"));
+}
