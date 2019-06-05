@@ -5,6 +5,43 @@
     var mousePos = { x: 0, y: 0 };
     var lastPos = mousePos;
 
+    //////////////////////////////////////////////
+    //Dont use jquery for mobile touch
+
+    document
+        .getElementById("canvas")
+        .addEventListener("touchstart", function(e) {
+            // console.log("start", e);
+            drawing = true;
+            lastPos = getTouchPos(e);
+        });
+
+    document.getElementById("canvas").addEventListener("touchend", function(e) {
+        drawing = false;
+    });
+
+    document
+        .getElementById("canvas")
+        .addEventListener("touchmove", function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            mousePos = getTouchPos(e);
+
+            renderCanvas();
+        });
+
+    function getTouchPos(mouseEvent) {
+        return {
+            x: mouseEvent.touches[0].pageX - $("canvas").offset().left,
+            y: mouseEvent.touches[0].pageY - $("canvas").offset().top
+            //OR var touch = e.touches[0]; // Get the information for finger #1
+            //  touchX=touch.pageX-touch.target.offsetLeft;
+            //  touchY=touch.pageY-touch.target.offsetTop;
+        };
+    }
+
+    //////////////////////////////////////////
+
     $("#canvas").on("mousedown", function(e) {
         drawing = true;
         lastPos = getMousePos(e);

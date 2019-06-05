@@ -5,6 +5,7 @@ body {
 #error {
     color: red;
 }
+
 canvas {
     border: 1px black dashed;
 }
@@ -50,5 +51,10 @@ a {
     /* For mobile phones: */
     #head {
         font-size: 18px;
+    }
+
+    #canvas {
+        height: 150px;
+        width: 100%;
     }
 }
