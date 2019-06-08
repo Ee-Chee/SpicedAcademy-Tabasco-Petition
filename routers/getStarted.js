@@ -42,14 +42,10 @@ router.post("/register", (req, res) => {
 });
 
 router.get("/log", (req, res) => {
-    //clear all cookies except crsf
-    req.session.signed = req.session.registered = req.session.signID = req.session.currID = null;
-    //OR app.get("/logout")
-    //req.session = null;
-    //res.redirect("/login") //not res.render
-    //you cant use redirect here because only one path available /log. Redirect to same path will make infinite request loop.
-    res.render("log", {
-        layout: "main"
+    req.session.destroy(function() {
+        res.render("log", {
+            layout: "main"
+        });
     });
 });
 

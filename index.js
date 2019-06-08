@@ -9,12 +9,19 @@ app.set("view engine", "handlebars");
 const dB = require("./utilities/db");
 const bct = require("./utilities/bcrypt");
 const csurf = require("csurf");
-const cookieSession = require("cookie-session");
+const session = require("express-session");
+const Store = require("connect-redis")(session);
 //use cookie-session to prevent from user tampering cookies on browser
 app.use(
-    cookieSession({
-        secret: `I'm wondering...`,
-        maxAge: 1000 * 60 * 60 * 24 * 14 //expired in 2 weeks
+    session({
+        store: new Store({
+            ttl: 3600,
+            host: "localhost",
+            port: 6379
+        }),
+        resave: false,
+        saveUninitialized: true,
+        secret: `I'm always angry.`
     })
 );
 //atob("session");
