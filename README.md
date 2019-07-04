@@ -86,7 +86,7 @@ exports.updateProfile = function(age, city, homepage, userID) {
 * Guess what? This website is made responsive and compatible to all kind of devices. The only challenge of this task is to make Canvas works on mobile devices(touch event is used). Try it out and make a signature(delete the old one if you already had one) on your phone. It works like a charm too.
 
 **_NOTES_**:
-* Coding technologies: HTML, CSS, Javascript, canvas, Jquery, DOM, Node.js, Express(handlebars, middleware, router), Jest, SuperTest, Redis, Postgresql, csurf, bcrypt and cookie-session.
+* Coding technologies: HTML, CSS, Javascript, canvas, Jquery, DOM, Node.js, Express(handlebars, middleware, router), Jest, SuperTest, Redis(check out [this branch](https://github.com/Ee-Chee/SpicedAcademy-Tabasco-Petition/tree/Master-Redis)), Postgresql, csurf, bcrypt and cookie-session.
 
 Thank you for reading. 9 out of 10 likes to this project.
 
